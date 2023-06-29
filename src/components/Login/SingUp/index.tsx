@@ -15,7 +15,7 @@ const SingUp: React.FC = () => {
     // const [isDisabled, setIsDisabled] = React.useState(true);
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required!'),
-        email: Yup.string().required('Email is required!'),
+        email: Yup.string().required('Email is required!').email().matches(/@[^.]*\./),
         password: Yup.string().required('Password is required!').min(8).max(16)
     });
     const {
@@ -49,49 +49,52 @@ const SingUp: React.FC = () => {
     }
 
     return (
-      <form className='flex flex-col'
+      <form className='grid place-items-center'
             onSubmit={handleSubmit(onSubmit)}>
-          <div>
-              <label htmlFor="">Email: </label>
-              <input
+          <h1 className='mb-10 text-xl'>Hi, it's Sing Up page</h1>
+          <div className='border-2 p-6'>
+              <div>
+                  <label htmlFor="">Email: </label>
+                  <input
+                    className='border-2 w-40 mb-1.5'
+                    type="text"
+                    value={email}
+                    placeholder='example@gmail.com'
+                    {...register('email')}
+                    onChange={onChangeEmail}
+                  />
+                  <div>{errors.email?.message}</div>
+              </div>
+              <div>
+                  <label htmlFor="">Username: </label>
+                  <input
+                    className='border-2 w-40 mb-1.5'
+                    type="text"
+                    value={username}
+                    placeholder='А-я, A-z, 1-0'
+                    {...register('username')}
+                    onChange={onChangeUsername}
+                  />
+                  <div>{errors.username?.message}</div>
+              </div>
+              <div>
+                  <label htmlFor="">Password: </label>
+                  <input
+                    className='border-2 w-40 mb-1.5'
+                    type="password"
+                    value={password}
+                    placeholder='8-16'
+                    {...register('password')}
+                    onChange={onChangePassword}
+                  />
+                  <div>{errors.password?.message}</div>
+              </div>
+              <button
                 className='border-2 w-40 mb-1.5'
-                type="email"
-                value={email}
-                placeholder='example@gmail.com'
-                {...register('email')}
-                onChange={onChangeEmail}
-              />
-              <div>{errors.email?.message}</div>
+                // disabled={isDisabled}
+              >Sing Up
+              </button>
           </div>
-          <div>
-              <label htmlFor="">Username: </label>
-              <input
-                className='border-2 w-40 mb-1.5'
-                type="text"
-                value={username}
-                placeholder='А-я, A-z, 1-0'
-                {...register('username')}
-                onChange={onChangeUsername}
-              />
-              <div>{errors.username?.message}</div>
-          </div>
-          <div>
-              <label htmlFor="">Password: </label>
-              <input
-                className='border-2 w-40 mb-1.5'
-                type="password"
-                value={password}
-                placeholder='8-16'
-                {...register('password')}
-                onChange={onChangePassword}
-              />
-              <div>{errors.password?.message}</div>
-          </div>
-          <button
-            className='border-2 w-40 mb-1.5'
-            // disabled={isDisabled}
-          >Sing Up
-          </button>
       </form>
     );
 };

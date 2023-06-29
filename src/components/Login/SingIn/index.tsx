@@ -43,12 +43,11 @@ const SingIn: React.FC = () => {
         setPassword(e.target.value.toLowerCase());
     }
     return (
-      <form className='flex flex-col'
-            onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col'>
               <div>
                   <input
-                    className='border-2 w-40 mb-1.5'
+                    className='border-2 w-50 mb-1.5'
                     type='email'
                     value={email}
                     placeholder='Email'
@@ -59,7 +58,7 @@ const SingIn: React.FC = () => {
               </div>
               <div>
                   <input
-                    className='border-2 w-40 mb-1.5'
+                    className='border-2 w-50 mb-1.5'
                     type='password'
                     value={password}
                     placeholder='Password'
@@ -69,10 +68,10 @@ const SingIn: React.FC = () => {
                   <div>{errors.password?.message}</div>
               </div>
           </div>
-          <button className='border-2 w-40 mb-1.5'
-                  // disabled={isDisabled}
-                  type='submit'>Sing In
-          </button>
+              <button className='border-2 mb-1.5 pl-1 pr-1'
+                // disabled={isDisabled}
+                      type='submit'>Sing In
+              </button>
       </form>
     );
 };
