@@ -3,6 +3,7 @@ import SingIn from "../../components/Login/SingIn";
 import {NavLink} from "react-router-dom";
 
 const Login:React.FC = () => {
+
     return (
         <div>
             Hi, it's Login page
