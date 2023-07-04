@@ -1,7 +1,12 @@
-import React from 'react'
+import PageContainer from '../../components/styled/PageContainer'
+const pic = require('../../assets/travel.png')
 
 const HomePage = () => {
-  return <div>HomePage</div>
+  return (
+    <PageContainer>
+      <img src={pic} alt="pic" />
+    </PageContainer>
+  )
 }
 
 export default HomePage

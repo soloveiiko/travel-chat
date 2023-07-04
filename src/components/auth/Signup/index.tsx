@@ -1,17 +1,33 @@
 // import React from 'react'
-import PasswordField from '../../PasswordField'
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import FormContainer from '../../styled/FormContainer'
 
 const Signup = () => {
+  const [formIsValid] = useState(true)
+
+  const sendData = () => {
+    console.log('sending data from signup...')
+  }
   return (
-    <section>
-      <input type="email" />
-      <PasswordField id="sdf" />
-      <PasswordField id="sdfdfg" />
-      <button className="btn btn-primary">Sign Up</button>
-      <h1>Have an account?</h1>
-      <NavLink to="/login">Login</NavLink>
-    </section>
+    <FormContainer>
+      <h1>Email</h1>
+      <input type="email" id="email" />
+      <h1>password</h1>
+      <input type="password" id="pass" />
+      <h1>Confirm password</h1>
+      <input type="password" id="passconfirm" />
+      <button
+        disabled={formIsValid}
+        className="btn btn-primary"
+        onClick={sendData}
+      >
+        Sign Up
+      </button>
+      <h1 className="text-center">
+        Have an account? <NavLink to="/login">Login</NavLink>
+      </h1>
+    </FormContainer>
   )
 }
 

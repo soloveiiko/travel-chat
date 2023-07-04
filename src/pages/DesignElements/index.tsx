@@ -1,9 +1,9 @@
-import PasswordField from '../../components/PasswordField'
-import FormContainer from '../../components/FormContainer'
+import FormContainer from '../../components/styled/FormContainer'
+import PageContainer from '../../components/styled/PageContainer'
 
 const DesignElements = () => {
   return (
-    <>
+    <PageContainer>
       <FormContainer>
         <div>
           <h1 className="font-oleo text-center text-2xl">This Is a Font</h1>
@@ -16,14 +16,14 @@ const DesignElements = () => {
         </button>
         <input type="text" placeholder="Text field" />
         <input disabled type="text" placeholder="Input disabled" />
-        <PasswordField id="sdfsdffgddfg" />
+        <input type="password" placeholder="password" />
         <input type="date" />
         <div>
           <input type="checkbox" id="checkbox" />
           <label htmlFor="checkbox">Checkbox</label>
         </div>
       </FormContainer>
-    </>
+    </PageContainer>
   )
 }
 
