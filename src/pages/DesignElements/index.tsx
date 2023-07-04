@@ -16,7 +16,7 @@ const DesignElements = () => {
         </button>
         <input type="text" placeholder="Text field" />
         <input disabled type="text" placeholder="Input disabled" />
-        <PasswordField />
+        <PasswordField id="sdfsdffgd" />
         <input type="date" />
         <div>
           <input type="checkbox" id="checkbox" />

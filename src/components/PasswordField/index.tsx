@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BsEyeSlash, BsEye } from 'react-icons/bs'
 
-const PasswordField = () => {
+const PasswordField = ({ id }: { id: string }) => {
   const [showPassword, setShowPassword] = useState('password')
   const toggleViewPassword = () => {
     setShowPassword((state) => (state === 'password' ? 'text' : 'password'))
@@ -13,7 +13,7 @@ const PasswordField = () => {
       <input
         className="m-0 w-[90%] rounded-md border border-slate-100 outline-none"
         type={showPassword}
-        id="pass"
+        id={id}
         name="password"
         minLength={8}
         placeholder="password"

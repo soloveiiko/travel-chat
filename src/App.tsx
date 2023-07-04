@@ -1,20 +1,21 @@
-import React from "react"
-import "./App.css"
-import { NavLink, Route, Routes } from "react-router-dom"
-import Basic from "./pages/basic/basic"
-import Login from "./pages/auth/login"
-import DesignElements from "./pages/DesignElements"
+import React from 'react'
+import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
+import DesignElements from './pages/DesignElements'
+import SignupPage from './pages/SignupPage'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
     <div>
-      <h2 className="text-3xl font-bold text-red-600 underline">Hello world</h2>
-      <h3>hello once again</h3>
-      <NavLink to="/login">Login</NavLink>
+      <Navbar />
       <Routes>
-        <Route path="/basic" element={<Basic />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/design" element={<DesignElements />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </div>
   )
