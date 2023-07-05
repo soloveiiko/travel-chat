@@ -1,5 +1,4 @@
 import {SIGN_UP_USER, SIGN_UP_SUCCESS, SIGN_UP_ERROR} from "./actionTypes";
-import passwordField from "../../components/PasswordField";
 
 export interface IAuth {
     // id: string;
@@ -7,20 +6,23 @@ export interface IAuth {
     password: string | null;
 }
 export interface AuthState {
-    // data: IAuth[],
+    data: IAuth[],
     loading: boolean,
     error: string | null,
     isAuth: boolean,
-    username: string | null;
-    password: string | null;
+    // username: string | null;
+    // password: string | null;
 }
 export interface FetchSignUpUserPayload {
-    credentials: string,
+    data: {
+        username: string;
+        password: string;
+    };
 }
 export interface FetchSignUpSuccessPayload {
-    username: string
-    password: string
-    // data: IAuth[]
+    // username: string
+    // password: string
+    data: IAuth[]
 }
 export interface FetchSignUpErrorPayload {
     error: string,

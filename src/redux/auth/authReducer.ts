@@ -7,12 +7,12 @@ import {
 
 
 const initialState: AuthState = {
-    // data: [],
+    data: [],
     loading: false,
     error: null,
     isAuth: false,
-    username: '',
-    password: '',
+    // username: '',
+    // password: '',
 }
 
 const authReducer = (state = initialState, action: AuthActions) => {
@@ -21,18 +21,18 @@ const authReducer = (state = initialState, action: AuthActions) => {
             return {
                 ...state,
                 loading: true,
-                username: '',
-                password: '',
-                // data: [],
+                // username: '',
+                // password: '',
+                data: [],
             }
         case SIGN_UP_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isAuth: true,
-                // data: action.payload.data,
-                username: action.payload.username,
-                password: action.payload.password,
+                data: action.payload.data,
+                // username: action.payload.username,
+                // password: action.payload.password,
                 error: null
             }
         case SIGN_UP_ERROR:
@@ -40,7 +40,7 @@ const authReducer = (state = initialState, action: AuthActions) => {
                 ...state,
                 loading: false,
                 isAuth: false,
-                // data: [],
+                data: [],
                 error: action.payload.error
             }
         default:

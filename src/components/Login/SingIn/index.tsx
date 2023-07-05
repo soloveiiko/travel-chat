@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import * as Yup from 'yup';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {useDispatch} from "react-redux";
-import {signUpUserAction} from "../../../redux/auth/action";
+import {useDispatch} from 'react-redux';
+import {signUpUserAction} from '../../../redux/auth/action';
 
 type SignInForm = {
     username: string,
@@ -12,7 +12,7 @@ type SignInForm = {
 const SingIn: React.FC = () => {
     // const [email, setEmail] = React.useState('');
     // const [password, setPassword] = React.useState('');
-    const [credentials, setCredentials] = useState({ username: "", password: "" });
+    const [credentials, setCredentials] = useState({ username: '', password: '' });
 
 
     const validationSchema = Yup.object().shape({
@@ -28,10 +28,9 @@ const SingIn: React.FC = () => {
     });
     const dispatch = useDispatch();
 
-    const onSubmit = (credentials: any) => {
-        dispatch(signUpUserAction(credentials));
-        // console.log(JSON.stringify(data, null, 2));
-        // console.log(credentials)
+    const onSubmit = () => {
+        dispatch(signUpUserAction({ data: credentials }));
+        setCredentials({ username: '', password: '' })
         // setEmail('');
         // setPassword('');
     }
