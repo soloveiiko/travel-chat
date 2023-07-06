@@ -1,12 +1,12 @@
-import React from 'react';
-import SingIn from "../../components/Login/SingIn";
+import React from 'react'
+import SingIn from '../../components/Login/SingIn'
 
-const LoginTest:React.FC = () => {
-    return (
-      <div>
-            <SingIn/>
-      </div>
-    );
-};
+const LoginTest: React.FC = () => {
+  return (
+    <div>
+      <SingIn />
+    </div>
+  )
+}
 
-export default LoginTest;
+export default LoginTest
