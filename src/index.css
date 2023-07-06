@@ -21,6 +21,12 @@
   input {
     @apply my-2 rounded-md border border-slate-500 px-4 py-2 outline-none;
   }
+  input:invalid[focused='true'] {
+    @apply border-red-600;
+  }
+  input:invalid[focused='true'] ~ span {
+    @apply block;
+  }
   input[type='text'] {
     @apply placeholder:italic disabled:bg-slate-100;
   }
