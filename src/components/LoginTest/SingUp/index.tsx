@@ -27,23 +27,12 @@ const SingUp: React.FC = () => {
     resolver: yupResolver(validationSchema),
   })
 
-  // const onChangeEmail = (e: { target: { value: string } }) => {
-  //   setEmail(e.target.value.toLowerCase())
-  // }
-  // const onChangeUsername = (e: { target: { value: string } }) => {
-  //   setUsername(e.target.value.toLowerCase())
-  // }
-  // const onChangePassword = (e: { target: { value: string } }) => {
-  //   setPassword(e.target.value.toLowerCase())
-  // }
   const handleChange = (e: any) =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   const onSubmit = () => {
     dispatch(signUpUserAction({ data: credentials }))
     setCredentials({ username: '', password: '' })
-    navigate('/')
-    // setEmail('');
-    // setPassword('');
+    navigate('/profile')
   }
 
   return (
