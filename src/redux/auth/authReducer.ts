@@ -1,9 +1,5 @@
 import {AuthActions, AuthState} from './types';
-import {
-    SIGN_UP_ERROR,
-    SIGN_UP_SUCCESS,
-    SIGN_UP_USER
-} from './actionTypes';
+import {LOGOUT, SIGN_UP_ERROR, SIGN_UP_SUCCESS, SIGN_UP_USER} from './actionTypes';
 
 
 const initialState: AuthState = {
@@ -21,8 +17,6 @@ const authReducer = (state = initialState, action: AuthActions) => {
             return {
                 ...state,
                 loading: true,
-                // username: '',
-                // password: '',
                 data: [],
             }
         case SIGN_UP_SUCCESS:
@@ -31,8 +25,6 @@ const authReducer = (state = initialState, action: AuthActions) => {
                 loading: false,
                 isAuth: true,
                 data: action.payload.data,
-                // username: action.payload.username,
-                // password: action.payload.password,
                 error: null
             }
         case SIGN_UP_ERROR:
@@ -43,6 +35,8 @@ const authReducer = (state = initialState, action: AuthActions) => {
                 data: [],
                 error: action.payload.error
             }
+        case LOGOUT:
+            return initialState
         default:
             return state
     }

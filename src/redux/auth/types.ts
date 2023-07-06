@@ -1,46 +1,45 @@
-import {SIGN_UP_USER, SIGN_UP_SUCCESS, SIGN_UP_ERROR} from "./actionTypes";
+import {SIGN_UP_USER, SIGN_UP_SUCCESS, SIGN_UP_ERROR, LOGOUT} from "./actionTypes";
 
 export interface IAuth {
-    // id: string;
-    username: string | null;
-    password: string | null;
+    username: string | null,
+    password: string | null,
 }
 export interface AuthState {
     data: IAuth[],
     loading: boolean,
     error: string | null,
     isAuth: boolean,
-    // username: string | null;
-    // password: string | null;
 }
 export interface FetchSignUpUserPayload {
     data: {
-        username: string;
-        password: string;
+        username: string,
+        password: string,
     };
 }
 export interface FetchSignUpSuccessPayload {
-    // username: string
-    // password: string
-    data: IAuth[]
+    data: IAuth[],
 }
 export interface FetchSignUpErrorPayload {
     error: string,
 }
 export type FetchSignUpUser = {
-    type: typeof SIGN_UP_USER;
-    payload: FetchSignUpUserPayload
+    type: typeof SIGN_UP_USER,
+    payload: FetchSignUpUserPayload,
 }
 
 export type FetchSignUpSuccess = {
-    type: typeof SIGN_UP_SUCCESS;
-    payload: FetchSignUpSuccessPayload;
+    type: typeof SIGN_UP_SUCCESS,
+    payload: FetchSignUpSuccessPayload,
 }
 export type FetchSignUpError = {
-    type: typeof SIGN_UP_ERROR;
-    payload: FetchSignUpErrorPayload;
+    type: typeof SIGN_UP_ERROR,
+    payload: FetchSignUpErrorPayload,
+}
+export interface FetchLogout {
+    type: typeof LOGOUT,
 }
 export type AuthActions =
   | FetchSignUpUser
   | FetchSignUpSuccess
   | FetchSignUpError
+  | FetchLogout
