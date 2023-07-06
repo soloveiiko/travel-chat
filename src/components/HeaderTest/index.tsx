@@ -3,19 +3,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
 import { NavLink } from 'react-router-dom'
 import { logoutAction } from '../../redux/auth/action'
+import {
+  getIsAuthSelector,
+  getUsernameSelector,
+} from '../../redux/auth/selectors'
 
 const Header: React.FC = () => {
-  const login = useSelector((state: RootState) => state.auth)
+  const isAuth = useSelector(getIsAuthSelector)
+  const username = useSelector(getUsernameSelector)
+  console.log(username)
   const dispatch = useDispatch()
   const onLogoutClick = () => {
     dispatch(logoutAction())
   }
   return (
     <div>
-      {login.isAuth ? (
-        <NavLink onClick={onLogoutClick} to="/">
-          logout
-        </NavLink>
+      {isAuth ? (
+        <>
+          <NavLink className="mr-4" to="/profile">
+            hi {username}
+          </NavLink>
+          <NavLink onClick={onLogoutClick} to="/">
+            logout
+          </NavLink>
+        </>
       ) : (
         <NavLink to="/logintest">login</NavLink>
       )}

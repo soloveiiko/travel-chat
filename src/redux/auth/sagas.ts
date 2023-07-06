@@ -10,7 +10,6 @@ function* fetchSignUpSaga({ payload: { data } }: any): any {
   try {
     yield register(data)
     yield put(signUpSuccessAction({ data }))
-    console.log(data.username)
   } catch (e: any) {
     yield put(
       signUpErrorAction({
