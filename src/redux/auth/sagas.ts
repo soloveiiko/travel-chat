@@ -46,6 +46,7 @@ function* fetchSignInSaga(action: any): any {
     const user = yield call(signIn, action.payload.data)
     const { data } = user
     yield put(signUpSuccessAction({ data }))
+    console.log({ data })
   } catch (e: any) {
     yield put(
       signUpErrorAction({

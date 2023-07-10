@@ -30,9 +30,9 @@ const SingUp: React.FC = () => {
   const handleChange = (e: any) =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   const onSubmit = () => {
-    dispatch(signUpUserAction({ data: credentials }))
-    setCredentials({ username: '', password: '' })
-    navigate('/profile')
+    // dispatch(signUpUserAction({ data: credentials }))
+    // setCredentials({ username: '', password: '' })
+    // navigate('/profile')
   }
   return (
     <form className="grid place-items-center" onSubmit={handleSubmit(onSubmit)}>
