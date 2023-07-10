@@ -1,20 +1,38 @@
-import { all, takeLatest, put } from 'redux-saga/effects'
+import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { SIGN_IN_USER, SIGN_UP_USER } from './actionTypes'
-import {
-  signInErrorAction,
-  signInSuccessAction,
-  signUpErrorAction,
-  signUpSuccessAction,
-} from './action'
+import { signUpErrorAction, signUpSuccessAction } from './action'
+import { signIn, signUp } from '../../api'
 
-const register = (data: any[]) => {
-  console.log({ data })
-}
-
-function* fetchSignUpSaga({ payload: { data } }: any): any {
+// function* fetchSignUpSaga({ payload: { data } }: any): any {
+//   try {
+//     register(data)
+//     yield put(signUpSuccessAction({ data }))
+//   } catch (e: any) {
+//     yield put(
+//       signUpErrorAction({
+//         error: e.message,
+//       })
+//     )
+//   }
+// }
+// function* fetchSignInSaga({ payload: { data } }: any): any {
+//   try {
+//     register(data)
+//     yield put(signInSuccessAction({ data }))
+//   } catch (e: any) {
+//     yield put(
+//       signInErrorAction({
+//         error: e.message,
+//       })
+//     )
+//   }
+// }
+function* fetchSignUpSaga(action: any): any {
   try {
-    register(data)
+    const user = yield call(signUp, action.payload.data)
+    const { data } = user
     yield put(signUpSuccessAction({ data }))
+    console.log({ data })
   } catch (e: any) {
     yield put(
       signUpErrorAction({
@@ -23,13 +41,14 @@ function* fetchSignUpSaga({ payload: { data } }: any): any {
     )
   }
 }
-function* fetchSignInSaga({ payload: { data } }: any): any {
+function* fetchSignInSaga(action: any): any {
   try {
-    register(data)
-    yield put(signInSuccessAction({ data }))
+    const user = yield call(signIn, action.payload.data)
+    const { data } = user
+    yield put(signUpSuccessAction({ data }))
   } catch (e: any) {
     yield put(
-      signInErrorAction({
+      signUpErrorAction({
         error: e.message,
       })
     )

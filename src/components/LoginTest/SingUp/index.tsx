@@ -34,7 +34,6 @@ const SingUp: React.FC = () => {
     setCredentials({ username: '', password: '' })
     navigate('/profile')
   }
-
   return (
     <form className="grid place-items-center" onSubmit={handleSubmit(onSubmit)}>
       <h1 className="mb-10 text-xl">Hi, it's Sing Up page</h1>

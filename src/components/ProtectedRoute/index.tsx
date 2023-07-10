@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 
 const ProtectedRoute = ({ isAuth, children }: any) => {
   if (!isAuth) {
-    return <Navigate to="/logintest" replace />
+    return <Navigate to="/signuptest" replace />
   }
   return children
 }
