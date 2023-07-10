@@ -29,7 +29,7 @@ const SingUp: React.FC = () => {
 
   const handleChange = (e: any) =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
-  const onSubmit = (auth: any) => {
+  const onSubmit = () => {
     dispatch(signUpUserAction({ data: credentials }))
     setCredentials({ username: '', password: '' })
     navigate('/profile')
