@@ -1,10 +1,22 @@
-import axios from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { RootState } from '../redux/rootReducer'
 
-const userInstance = axios.create({
-  baseURL: `${process.env.REACT_APP_API}/users`,
+interface UserInstance extends AxiosInstance {
+  request<T = any, R = T>(config: AxiosRequestConfig): Promise<R>
+}
+
+const userInstance: UserInstance = axios.create({
+  baseURL: 'http://ec2-13-53-130-150.eu-north-1.compute.amazonaws.com:8080',
 })
-export const signIn = (auth: RootState) =>
-  userInstance.request({ method: 'POST', data: auth, url: '/signIn' })
 export const signUp = (auth: RootState) =>
-  userInstance.request({ method: 'POST', data: auth, url: '/signUp' })
+  userInstance.request<{ data: any }>({
+    method: 'POST',
+    data: auth,
+    url: '/signup',
+  })
+export const signIn = (auth: RootState) =>
+  userInstance.request<{ data: any }>({
+    method: 'POST',
+    data: auth,
+    url: '/login',
+  })

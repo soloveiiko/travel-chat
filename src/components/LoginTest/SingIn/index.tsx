@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
 import { signInUserAction } from '../../../redux/auth/action'
+import { useNavigate } from 'react-router-dom'
 
 type SignInForm = {
   username: string
@@ -11,7 +12,7 @@ type SignInForm = {
 }
 const SingIn: React.FC = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' })
-
+  const navigate = useNavigate()
   const validationSchema = Yup.object().shape({
     username: Yup.string().required('Username is required!'),
     password: Yup.string().required('Password is required!').min(8).max(16),
@@ -28,16 +29,8 @@ const SingIn: React.FC = () => {
   const onSubmit = () => {
     dispatch(signInUserAction({ data: credentials }))
     setCredentials({ username: '', password: '' })
-    // setEmail('');
-    // setPassword('');
+    navigate('/profile')
   }
-
-  // const onChangeEmail = (e: { target: { value: string; }; }) => {
-  //     setEmail(e.target.value.toLowerCase());
-  // }
-  // const onChangePassword = (e: { target: { value: string; }; }) => {
-  //     setPassword(e.target.value.toLowerCase());
-  // }
   const handleChange = (e: any) =>
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   return (
