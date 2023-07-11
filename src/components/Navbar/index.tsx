@@ -1,20 +1,27 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { useDispatch, useSelector } from 'react-redux'
+import { getIsAuthSelector } from '../../redux/auth/selectors'
+import { logoutAction } from '../../redux/auth/action'
 
 const links = [
-  { href: '/login', title: 'Login' },
-  { href: '/signup', title: 'Signup' },
+  // { href: '/login', title: 'Login' },
+  // { href: '/signup', title: 'Sign Up' },
   { href: '/design', title: 'Design' },
 ]
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const isAuth = useSelector(getIsAuthSelector)
+  const dispatch = useDispatch()
 
+  const onLogoutClick = () => {
+    dispatch(logoutAction())
+  }
   const closeMenu = () => {
     setIsOpen(false)
   }
-
   const toggleNavbar = () => {
     setIsOpen(!isOpen)
   }
@@ -33,6 +40,20 @@ const Navbar = () => {
           ))}
         </div>
         {/*  mobile */}
+        {!isAuth ? (
+          <>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/signup">Sign Up</NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink to="/profile">Profile</NavLink>
+            <NavLink onClick={onLogoutClick} to="/logout">
+              Logout
+            </NavLink>
+          </>
+        )}
+
         <div
           className="cursor-pointer text-2xl md:hidden"
           onClick={toggleNavbar}
@@ -54,6 +75,19 @@ const Navbar = () => {
               {link.title}
             </NavLink>
           ))}
+          {!isAuth ? (
+            <>
+              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/signup">Sign Up</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="/profile">Profile</NavLink>
+              <NavLink onClick={onLogoutClick} to="/logout">
+                Logout
+              </NavLink>
+            </>
+          )}
         </nav>
       )}
       {/*----------- clickable shadow area -----------*/}

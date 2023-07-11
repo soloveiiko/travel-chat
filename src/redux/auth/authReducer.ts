@@ -25,15 +25,6 @@ const authReducer = (state = initialState, action: AuthActions) => {
         loading: true,
         data: [],
       }
-    case SIGN_IN_SUCCESS:
-    case SIGN_UP_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuth: true,
-        data: action.payload.data,
-        error: null,
-      }
     case SIGN_IN_ERROR:
     case SIGN_UP_ERROR:
       return {
@@ -42,6 +33,15 @@ const authReducer = (state = initialState, action: AuthActions) => {
         isAuth: false,
         data: [],
         error: action.payload.error,
+      }
+    case SIGN_IN_SUCCESS:
+    case SIGN_UP_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuth: true,
+        data: action.payload.data,
+        error: null,
       }
     case LOGOUT:
       return initialState

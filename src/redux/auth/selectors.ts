@@ -19,6 +19,3 @@ export const getIsAuthSelector = createSelector(
   getAuthState,
   (auth) => auth.isAuth
 )
-export const getUsernameSelector = createSelector(getAuthState, (auth) =>
-  auth.data.length > 0 ? auth.data[0].username : null
-)

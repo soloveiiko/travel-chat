@@ -8,7 +8,7 @@ import FormInput, {
 import FormContainer from '../../styled/FormContainer'
 import { signUpUserAction } from '../../../redux/auth/action'
 import { useDispatch } from 'react-redux'
-import { FetchSignUpUserPayload } from '../../../redux/auth/types'
+import { FetchSignUserPayload } from '../../../redux/auth/types'
 
 const SignupExp = () => {
   const [credentials, setCredentials] = useState({
@@ -27,7 +27,7 @@ const SignupExp = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    const payload: FetchSignUpUserPayload = {
+    const payload: FetchSignUserPayload = {
       data: {
         username: credentials[usernameField.name],
         password: credentials[passwordField.name],

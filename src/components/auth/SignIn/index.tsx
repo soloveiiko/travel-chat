@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { FetchSignUserPayload } from '../../../redux/auth/types'
+import { signInUserAction } from '../../../redux/auth/action'
 import FormInput, { passwordField, usernameField } from '../../formInputs'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { FetchSignUpUserPayload } from '../../../redux/auth/types'
-import { signUpUserAction } from '../../../redux/auth/action'
 import FormContainer from '../../styled/FormContainer'
+import { RootState } from '../../../redux/rootReducer'
 
 const SignIn: React.FC = () => {
   const [credentials, setCredentials] = useState({
@@ -14,20 +15,24 @@ const SignIn: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const inputs = [usernameField, passwordField]
-
+  const auth = useSelector((state: RootState) => state.auth)
+  useEffect(() => {
+    console.log('Updated state:', auth)
+  }, [auth, navigate])
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    const payload: FetchSignUpUserPayload = {
+    const payload: FetchSignUserPayload = {
       data: {
         username: credentials[usernameField.name],
         password: credentials[passwordField.name],
       },
     }
-    dispatch(signUpUserAction(payload))
+    dispatch(signInUserAction(payload))
     setCredentials({
       [usernameField.name]: '',
       [passwordField.name]: '',
     })
+    console.log('form', auth)
     navigate('/profile')
   }
   const handleChange = (e: any) => {
@@ -46,9 +51,9 @@ const SignIn: React.FC = () => {
           />
         ))}
         <button className="btn btn-primary">Submit</button>
-        {/*<h1 className="text-center">*/}
-        {/*  Have an account? <NavLink to="/login">Login</NavLink>*/}
-        {/*</h1>*/}
+        <h1 className="text-center">
+          Don't have an account? <NavLink to="/signup">Sign Up</NavLink>
+        </h1>
       </FormContainer>
     </form>
   )
