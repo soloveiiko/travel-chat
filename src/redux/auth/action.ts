@@ -10,51 +10,48 @@ import {
 import {
   FetchLogout,
   FetchSignInError,
-  FetchSignInErrorPayload,
+  FetchSignErrorPayload,
   FetchSignInSuccess,
-  FetchSignInSuccessPayload,
+  FetchSignSuccessPayload,
   FetchSignInUser,
-  FetchSignInUserPayload,
   FetchSignUpError,
-  FetchSignUpErrorPayload,
   FetchSignUpSuccess,
-  FetchSignUpSuccessPayload,
   FetchSignUpUser,
-  FetchSignUpUserPayload,
+  FetchSignUserPayload,
 } from './types'
 
 export const signUpUserAction = (
-  payload: FetchSignUpUserPayload
+  payload: FetchSignUserPayload
 ): FetchSignUpUser => ({
   type: SIGN_UP_USER,
   payload,
 })
 export const signUpSuccessAction = (
-  payload: FetchSignUpSuccessPayload
+  payload: FetchSignSuccessPayload
 ): FetchSignUpSuccess => ({
   type: SIGN_UP_SUCCESS,
   payload,
 })
 export const signUpErrorAction = (
-  payload: FetchSignUpErrorPayload
+  payload: FetchSignErrorPayload
 ): FetchSignUpError => ({
   type: SIGN_UP_ERROR,
   payload,
 })
 export const signInUserAction = (
-  payload: FetchSignInUserPayload
+  payload: FetchSignUserPayload
 ): FetchSignInUser => ({
   type: SIGN_IN_USER,
   payload,
 })
 export const signInSuccessAction = (
-  payload: FetchSignInSuccessPayload
+  payload: FetchSignSuccessPayload
 ): FetchSignInSuccess => ({
   type: SIGN_IN_SUCCESS,
   payload,
 })
 export const signInErrorAction = (
-  payload: FetchSignInErrorPayload
+  payload: FetchSignErrorPayload
 ): FetchSignInError => ({
   type: SIGN_IN_ERROR,
   payload,
