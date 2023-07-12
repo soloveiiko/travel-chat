@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import FormInput, {
   passwordConfirmField,
@@ -7,8 +7,9 @@ import FormInput, {
 } from '../../formInputs'
 import FormContainer from '../../styled/FormContainer'
 import { signUpUserAction } from '../../../redux/auth/action'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FetchSignUserPayload } from '../../../redux/auth/types'
+import { getIsAuthSelector } from '../../../redux/auth/selectors'
 
 const SignUp: React.FC = () => {
   const [credentials, setCredentials] = useState({
@@ -18,6 +19,13 @@ const SignUp: React.FC = () => {
   })
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const isAuth = useSelector(getIsAuthSelector)
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/profile')
+    }
+  }, [isAuth])
 
   const inputs = [
     usernameField,

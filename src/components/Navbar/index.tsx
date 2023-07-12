@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -52,7 +52,7 @@ const Navbar = () => {
         ) : (
           <>
             <NavLink to="/profile">Hi {username}</NavLink>
-            <NavLink onClick={onLogoutClick} to="/logout">
+            <NavLink onClick={onLogoutClick} to="/">
               Logout
             </NavLink>
           </>
@@ -87,7 +87,7 @@ const Navbar = () => {
           ) : (
             <>
               <NavLink to="/profile">Hi{username}</NavLink>
-              <NavLink onClick={onLogoutClick} to="/logout">
+              <NavLink onClick={onLogoutClick} to="/">
                 Logout
               </NavLink>
             </>
