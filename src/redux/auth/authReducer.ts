@@ -11,9 +11,10 @@ import {
 
 const initialState: AuthState = {
   data: [],
+  username: null,
+  isAuth: false,
   loading: false,
   error: null,
-  isAuth: false,
 }
 
 const authReducer = (state = initialState, action: AuthActions) => {
@@ -22,25 +23,26 @@ const authReducer = (state = initialState, action: AuthActions) => {
     case SIGN_IN_USER:
       return {
         ...state,
-        loading: true,
         data: [],
+        loading: true,
       }
     case SIGN_IN_ERROR:
     case SIGN_UP_ERROR:
       return {
         ...state,
-        loading: false,
-        isAuth: false,
         data: [],
+        isAuth: false,
+        loading: false,
         error: action.payload.error,
       }
     case SIGN_IN_SUCCESS:
     case SIGN_UP_SUCCESS:
       return {
         ...state,
-        loading: false,
-        isAuth: true,
         data: action.payload.data,
+        username: action.payload.username,
+        isAuth: true,
+        loading: false,
         error: null,
       }
     case LOGOUT:
@@ -49,4 +51,5 @@ const authReducer = (state = initialState, action: AuthActions) => {
       return state
   }
 }
+
 export default authReducer

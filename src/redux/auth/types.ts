@@ -1,11 +1,11 @@
 import {
-  SIGN_UP_USER,
-  SIGN_UP_SUCCESS,
-  SIGN_UP_ERROR,
   LOGOUT,
-  SIGN_IN_USER,
-  SIGN_IN_SUCCESS,
   SIGN_IN_ERROR,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_USER,
+  SIGN_UP_ERROR,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_USER,
 } from './actionTypes'
 
 export interface IAuth {}
@@ -15,6 +15,7 @@ export interface AuthState {
   loading: boolean
   error: string | null
   isAuth: boolean
+  username: string | null
 }
 
 export interface FetchSignUserPayload {
@@ -25,6 +26,7 @@ export interface FetchSignUserPayload {
 }
 export interface FetchSignSuccessPayload {
   data: IAuth[]
+  username: string
 }
 export interface FetchSignErrorPayload {
   error: string
@@ -48,8 +50,8 @@ export type FetchSignInUser = {
 }
 
 export type FetchSignInSuccess = {
-  payload: FetchSignSuccessPayload
   type: typeof SIGN_IN_SUCCESS
+  payload: FetchSignSuccessPayload
 }
 export type FetchSignInError = {
   type: typeof SIGN_IN_ERROR

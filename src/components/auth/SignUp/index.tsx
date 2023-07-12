@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import FormInput, {
-  usernameField,
-  passwordField,
   passwordConfirmField,
+  passwordField,
+  usernameField,
 } from '../../formInputs'
 import FormContainer from '../../styled/FormContainer'
 import { signUpUserAction } from '../../../redux/auth/action'
