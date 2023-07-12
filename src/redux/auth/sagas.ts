@@ -10,9 +10,11 @@ import { signIn, signUp } from '../../api'
 
 function* fetchSignUpSaga(action: any): any {
   try {
-    const user = yield call(signUp, action.payload.data)
-    const { data } = user
-    yield put(signUpSuccessAction({ data }))
+    const response = yield call(signUp, action.payload.data)
+    const { data } = response
+    const username = data.username
+    yield put(signUpSuccessAction({ data, username }))
+    console.log('Sign Up data', { data })
   } catch (e: any) {
     yield put(
       signUpErrorAction({
@@ -23,9 +25,11 @@ function* fetchSignUpSaga(action: any): any {
 }
 function* fetchSignInSaga(action: any): any {
   try {
-    const user = yield call(signIn, action.payload.data)
-    const { data } = user
-    yield put(signInSuccessAction({ data }))
+    const response = yield call(signIn, action.payload.data)
+    const { data } = response
+    const username = data.username
+    yield put(signInSuccessAction({ data, username }))
+    console.log('Sign In data', { data })
   } catch (e: any) {
     yield put(
       signInErrorAction({

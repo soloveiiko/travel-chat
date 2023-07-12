@@ -14,6 +14,10 @@ export const getErrorSelector = createSelector(
   getAuthState,
   (auth) => auth.error
 )
+export const getUsernameSelector = createSelector(
+  getAuthState,
+  (auth) => auth.username
+)
 
 export const getIsAuthSelector = createSelector(
   getAuthState,

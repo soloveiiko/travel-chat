@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
-import { getIsAuthSelector } from '../../redux/auth/selectors'
+import {
+  getIsAuthSelector,
+  getUsernameSelector,
+} from '../../redux/auth/selectors'
 import { logoutAction } from '../../redux/auth/action'
 
 const links = [
@@ -14,6 +17,7 @@ const links = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const isAuth = useSelector(getIsAuthSelector)
+  const username = useSelector(getUsernameSelector)
   const dispatch = useDispatch()
 
   const onLogoutClick = () => {
@@ -47,7 +51,7 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/profile">Hi {username}</NavLink>
             <NavLink onClick={onLogoutClick} to="/logout">
               Logout
             </NavLink>
@@ -82,7 +86,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <NavLink to="/profile">Profile</NavLink>
+              <NavLink to="/profile">Hi{username}</NavLink>
               <NavLink onClick={onLogoutClick} to="/logout">
                 Logout
               </NavLink>

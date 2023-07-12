@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSignUserPayload } from '../../../redux/auth/types'
@@ -16,9 +16,7 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate()
   const inputs = [usernameField, passwordField]
   const auth = useSelector((state: RootState) => state.auth)
-  useEffect(() => {
-    console.log('Updated state:', auth)
-  }, [auth, navigate])
+
   const handleSubmit = (e: any) => {
     e.preventDefault()
     const payload: FetchSignUserPayload = {
