@@ -21,7 +21,7 @@ const SignIn: React.FC = () => {
     if (isAuth) {
       navigate('/profile')
     }
-  }, [isAuth])
+  }, [isAuth, navigate])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
