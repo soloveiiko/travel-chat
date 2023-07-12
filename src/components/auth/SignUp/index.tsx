@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import FormInput, {
   passwordConfirmField,
@@ -10,7 +10,7 @@ import { signUpUserAction } from '../../../redux/auth/action'
 import { useDispatch } from 'react-redux'
 import { FetchSignUserPayload } from '../../../redux/auth/types'
 
-const SignupExp = () => {
+const SignUp: React.FC = () => {
   const [credentials, setCredentials] = useState({
     [usernameField.name]: '',
     [passwordField.name]: '',
@@ -39,7 +39,6 @@ const SignupExp = () => {
       [passwordField.name]: '',
       [passwordConfirmField.name]: '',
     })
-    navigate('/profile')
   }
 
   const handleChange = (e: any) => {
@@ -67,4 +66,4 @@ const SignupExp = () => {
   )
 }
 
-export default SignupExp
+export default SignUp

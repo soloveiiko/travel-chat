@@ -1,4 +1,5 @@
 import {
+  CLEAR_ERROR,
   LOGOUT,
   SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
@@ -10,7 +11,6 @@ import {
 import {
   FetchLogout,
   FetchSignInError,
-  FetchSignErrorPayload,
   FetchSignInSuccess,
   FetchSignSuccessPayload,
   FetchSignInUser,
@@ -18,6 +18,8 @@ import {
   FetchSignUpSuccess,
   FetchSignUpUser,
   FetchSignUserPayload,
+  FetchSignUpErrorPayload,
+  FetchSignInErrorPayload,
 } from './types'
 
 export const signUpUserAction = (
@@ -33,7 +35,7 @@ export const signUpSuccessAction = (
   payload,
 })
 export const signUpErrorAction = (
-  payload: FetchSignErrorPayload
+  payload: FetchSignUpErrorPayload
 ): FetchSignUpError => ({
   type: SIGN_UP_ERROR,
   payload,
@@ -51,7 +53,7 @@ export const signInSuccessAction = (
   payload,
 })
 export const signInErrorAction = (
-  payload: FetchSignErrorPayload
+  payload: FetchSignInErrorPayload
 ): FetchSignInError => ({
   type: SIGN_IN_ERROR,
   payload,
@@ -59,3 +61,8 @@ export const signInErrorAction = (
 export const logoutAction = (): FetchLogout => ({
   type: LOGOUT,
 })
+export const clearErrorAction = () => {
+  return {
+    type: CLEAR_ERROR,
+  }
+}

@@ -1,21 +1,19 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { FetchSignUserPayload } from '../../../redux/auth/types'
 import { signInUserAction } from '../../../redux/auth/action'
 import FormInput, { passwordField, usernameField } from '../../formInputs'
 import FormContainer from '../../styled/FormContainer'
-import { RootState } from '../../../redux/rootReducer'
 
 const SignIn: React.FC = () => {
   const [credentials, setCredentials] = useState({
     [usernameField.name]: '',
     [passwordField.name]: '',
   })
+  const inputs = [usernameField, passwordField]
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const inputs = [usernameField, passwordField]
-  const auth = useSelector((state: RootState) => state.auth)
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -26,12 +24,11 @@ const SignIn: React.FC = () => {
       },
     }
     dispatch(signInUserAction(payload))
+    navigate('/profile')
     setCredentials({
       [usernameField.name]: '',
       [passwordField.name]: '',
     })
-    console.log('form', auth)
-    navigate('/profile')
   }
   const handleChange = (e: any) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
