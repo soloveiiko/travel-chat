@@ -52,7 +52,7 @@ const Navbar = () => {
         ) : (
           <>
             <NavLink to="/profile">Hi {username}</NavLink>
-            <NavLink onClick={onLogoutClick} to="/logout">
+            <NavLink onClick={onLogoutClick} to="/">
               Logout
             </NavLink>
           </>
@@ -87,7 +87,7 @@ const Navbar = () => {
           ) : (
             <>
               <NavLink to="/profile">Hi{username}</NavLink>
-              <NavLink onClick={onLogoutClick} to="/logout">
+              <NavLink onClick={onLogoutClick} to="/">
                 Logout
               </NavLink>
             </>

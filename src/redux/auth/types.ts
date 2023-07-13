@@ -1,4 +1,5 @@
 import {
+  CLEAR_ERROR,
   LOGOUT,
   SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
@@ -28,7 +29,10 @@ export interface FetchSignSuccessPayload {
   data: IAuth[]
   username: string
 }
-export interface FetchSignErrorPayload {
+export interface FetchSignUpErrorPayload {
+  error: string
+}
+export interface FetchSignInErrorPayload {
   error: string
 }
 export type FetchSignUpUser = {
@@ -41,7 +45,7 @@ export type FetchSignUpSuccess = {
 }
 export type FetchSignUpError = {
   type: typeof SIGN_UP_ERROR
-  payload: FetchSignErrorPayload
+  payload: FetchSignUpErrorPayload
 }
 
 export type FetchSignInUser = {
@@ -55,11 +59,14 @@ export type FetchSignInSuccess = {
 }
 export type FetchSignInError = {
   type: typeof SIGN_IN_ERROR
-  payload: FetchSignErrorPayload
+  payload: FetchSignInErrorPayload
 }
 
 export interface FetchLogout {
   type: typeof LOGOUT
+}
+export interface FetchClearError {
+  type: typeof CLEAR_ERROR
 }
 
 export type AuthActions =
@@ -70,3 +77,4 @@ export type AuthActions =
   | FetchSignInSuccess
   | FetchSignInError
   | FetchLogout
+  | FetchClearError

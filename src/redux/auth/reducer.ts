@@ -1,5 +1,6 @@
 import { AuthActions, AuthState } from './types'
 import {
+  CLEAR_ERROR,
   LOGOUT,
   SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
@@ -17,7 +18,7 @@ const initialState: AuthState = {
   error: null,
 }
 
-const authReducer = (state = initialState, action: AuthActions) => {
+const reducer = (state = initialState, action: AuthActions) => {
   switch (action.type) {
     case SIGN_UP_USER:
     case SIGN_IN_USER:
@@ -47,9 +48,14 @@ const authReducer = (state = initialState, action: AuthActions) => {
       }
     case LOGOUT:
       return initialState
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
+      }
     default:
       return state
   }
 }
 
-export default authReducer
+export default reducer
