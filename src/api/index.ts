@@ -6,7 +6,7 @@ interface UserInstance extends AxiosInstance {
 }
 
 const userInstance: UserInstance = axios.create({
-  baseURL: 'http://ec2-13-53-130-150.eu-north-1.compute.amazonaws.com:8080',
+  baseURL: '/api/',
 })
 export const signUp = (auth: RootState) =>
   userInstance.request<{ data: any }>({
