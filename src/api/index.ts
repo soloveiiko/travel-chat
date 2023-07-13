@@ -12,11 +12,11 @@ export const signUp = (auth: RootState) =>
   userInstance.request<{ data: any }>({
     method: 'POST',
     data: auth,
-    url: '/signup',
+    url: 'signup',
   })
 export const signIn = (auth: RootState) =>
   userInstance.request<{ data: any }>({
     method: 'POST',
     data: auth,
-    url: '/login',
+    url: 'login',
   })
