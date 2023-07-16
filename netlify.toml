@@ -1,2 +1,7 @@
 [build.environment]
 CI = "false"
+[[redirects]]
+  from = "/api/"
+  to = "http://ec2-13-53-130-150.eu-north-1.compute.amazonaws.com:8080"
+  status = 200
+  force = false
