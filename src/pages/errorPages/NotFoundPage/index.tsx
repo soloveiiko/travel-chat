@@ -1,11 +1,14 @@
 import React from 'react'
+import ErrorPageContainer from '../../../components/styled/ErrorPageContainer'
+import ErrorStatusContainer from '../../../components/styled/ErrorPageContainer/ErrorStatusContainer'
+import ErrorTextContainer from '../../../components/styled/ErrorPageContainer/ErrorTextContainer'
 
 const NotFoundPage: React.FC = () => {
   return (
-    <div>
-      <h1>404 Error</h1>
-      <h1>Page Not Found</h1>
-    </div>
+    <ErrorPageContainer>
+      <ErrorStatusContainer>404 Error</ErrorStatusContainer>
+      <ErrorTextContainer>Page Not Found</ErrorTextContainer>
+    </ErrorPageContainer>
   )
 }
 
