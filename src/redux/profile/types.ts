@@ -1,15 +1,14 @@
 import { SET_USER, SET_USER_ERROR, SET_USER_SUCCESS } from './actionTypes'
 export interface IUser {}
 export interface UserState {
-  user: []
-  role: string
+  data: []
   error: string | null
 }
 export interface FetchUserPayload {
-  user: []
+  data: []
 }
 export interface FetchUserSuccessPayload {
-  user: IUser[]
+  data: IUser[]
 }
 export interface FetchUserErrorPayload {
   error: string

@@ -2,8 +2,7 @@ import { UserAction, UserState } from './types'
 import { SET_USER, SET_USER_ERROR, SET_USER_SUCCESS } from './actionTypes'
 
 const initialState: UserState = {
-  user: [],
-  role: 'user',
+  data: [],
   error: null,
 }
 
@@ -12,18 +11,18 @@ const reducer = (state = initialState, action: UserAction) => {
     case SET_USER:
       return {
         ...state,
-        user: [],
+        data: [],
       }
     case SET_USER_ERROR:
       return {
         ...state,
         user: [],
-        error: action.payload.error,
+        data: action.payload.error,
       }
     case SET_USER_SUCCESS:
       return {
         ...state,
-        user: action.payload.user,
+        data: action.payload.data,
       }
     default:
       return state

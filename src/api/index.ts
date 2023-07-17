@@ -20,3 +20,9 @@ export const signIn = (auth: RootState) =>
     data: auth,
     url: 'login',
   })
+export const setUserProfile = (profile: RootState) =>
+  userInstance.request<{ data: any }>({
+    method: 'GET',
+    data: profile,
+    url: 'auth/me',
+  })
