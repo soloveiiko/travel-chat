@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { FetchSignUserPayload } from '../../../redux/auth/types'
 import { signInUserAction } from '../../../redux/auth/action'
-import FormInput, { passwordField, usernameField } from '../../formInputs'
+import FormInput, {
+  emailField,
+  passwordField,
+  usernameField,
+} from '../../formInputs'
 import FormContainer from '../../styled/FormContainer'
 import { getIsAuthSelector } from '../../../redux/auth/selectors'
+import { auth, signInWithEmailAndPassword } from '../../../firebase/firebase'
 
 const SignIn: React.FC = () => {
   const [credentials, setCredentials] = useState({
     [usernameField.name]: '',
+    [emailField.name]: '',
     [passwordField.name]: '',
   })
-  const inputs = [usernameField, passwordField]
+  const inputs = [usernameField, emailField, passwordField]
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isAuth = useSelector(getIsAuthSelector)
@@ -21,22 +26,36 @@ const SignIn: React.FC = () => {
     if (isAuth) {
       navigate('/profile')
     }
-  }, [isAuth, navigate])
+  }, [isAuth])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    const payload: FetchSignUserPayload = {
-      data: {
-        username: credentials[usernameField.name],
-        password: credentials[passwordField.name],
-      },
-    }
-    dispatch(signInUserAction(payload))
-    setCredentials({
-      [usernameField.name]: '',
-      [passwordField.name]: '',
-    })
+    signInWithEmailAndPassword(
+      auth,
+      credentials[emailField.name],
+      credentials[passwordField.name]
+    )
+      .then((userAuth) => {
+        dispatch(
+          signInUserAction({
+            data: {
+              username: userAuth.user.displayName,
+              email: userAuth.user.email,
+              password: credentials[passwordField.name],
+            },
+          })
+        )
+        setCredentials({
+          [usernameField.name]: '',
+          [emailField.name]: '',
+          [passwordField.name]: '',
+        })
+      })
+      .catch((err) => {
+        alert(err)
+      })
   }
+
   const handleChange = (e: any) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
