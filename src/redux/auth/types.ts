@@ -21,13 +21,13 @@ export interface AuthState {
 
 export interface FetchSignUserPayload {
   data: {
-    username: string
-    password: string
+    username: string | undefined | null
+    password?: string
   }
 }
 export interface FetchSignSuccessPayload {
   data: IAuth[]
-  username: string
+  username: string | undefined | null
 }
 export interface FetchSignUpErrorPayload {
   error: string

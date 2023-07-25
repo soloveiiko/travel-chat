@@ -10,6 +10,15 @@ import { signUpUserAction } from '../../../redux/auth/action'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSignUserPayload } from '../../../redux/auth/types'
 import { getIsAuthSelector } from '../../../redux/auth/selectors'
+//* FIREBASE
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  // signInWithRedirect,
+  // signOut,
+  // onAuthStateChanged,
+} from 'firebase/auth'
+import { auth } from '../../../firebase/firebase'
 
 const SignUp: React.FC = () => {
   const [credentials, setCredentials] = useState({
@@ -25,7 +34,7 @@ const SignUp: React.FC = () => {
     if (isAuth) {
       navigate('/profile')
     }
-  }, [isAuth, navigate])
+  }, [isAuth])
 
   const inputs = [
     usernameField,
@@ -53,10 +62,26 @@ const SignUp: React.FC = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
 
+  const onGoogleSignUp = async () => {
+    const provider = new GoogleAuthProvider()
+    const userDataFromGoogle = await signInWithPopup(auth, provider)
+    console.log('sdf from signInWithPopup', userDataFromGoogle)
+    const displayNameFromGoogle = userDataFromGoogle?.user.displayName
+    const payload: FetchSignUserPayload = {
+      data: {
+        username: displayNameFromGoogle,
+      },
+    }
+    dispatch(signUpUserAction(payload))
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <FormContainer>
         <h1 className="text-center">Sign Up</h1>
+        <button className="btn btn-secondary" onClick={onGoogleSignUp}>
+          SignUp with Google
+        </button>
         {inputs.map((input, index) => (
           <FormInput
             key={index}
