@@ -33,7 +33,7 @@ function App() {
       }
     })
     console.log('page loaded')
-  }, [])
+  }, [dispatch])
 
   return (
     <div>

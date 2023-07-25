@@ -28,7 +28,7 @@ const SignUp: React.FC = () => {
     if (isAuth) {
       navigate('/profile')
     }
-  }, [isAuth])
+  }, [isAuth, navigate])
 
   const inputs = [
     usernameField,
