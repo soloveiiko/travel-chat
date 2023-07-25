@@ -11,13 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FetchSignUserPayload } from '../../../redux/auth/types'
 import { getIsAuthSelector } from '../../../redux/auth/selectors'
 //* FIREBASE
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  // signInWithRedirect,
-  // signOut,
-  // onAuthStateChanged,
-} from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../firebase/firebase'
 
 const SignUp: React.FC = () => {
@@ -66,13 +60,18 @@ const SignUp: React.FC = () => {
     const provider = new GoogleAuthProvider()
     const userDataFromGoogle = await signInWithPopup(auth, provider)
     console.log('sdf from signInWithPopup', userDataFromGoogle)
-    const displayNameFromGoogle = userDataFromGoogle?.user.displayName
-    const payload: FetchSignUserPayload = {
-      data: {
-        username: displayNameFromGoogle,
-      },
+    const displayNameFromGoogle = userDataFromGoogle.user.displayName
+    if (displayNameFromGoogle) {
+      const payload: FetchSignUserPayload = {
+        data: {
+          username: displayNameFromGoogle,
+          password: 'password1234',
+        },
+      }
+      dispatch(signUpUserAction(payload))
+    } else {
+      console.error('Error: Username is null')
     }
-    dispatch(signUpUserAction(payload))
   }
 
   return (

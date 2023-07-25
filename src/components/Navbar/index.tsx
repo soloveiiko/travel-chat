@@ -7,6 +7,7 @@ import {
   getUsernameSelector,
 } from '../../redux/auth/selectors'
 import { logoutAction } from '../../redux/auth/action'
+import { auth } from '../../firebase/firebase'
 
 const links = [
   // { href: '/login', title: 'Login' },
@@ -22,6 +23,7 @@ const Navbar = () => {
 
   const onLogoutClick = () => {
     dispatch(logoutAction())
+    auth.signOut()
   }
   const closeMenu = () => {
     setIsOpen(false)
