@@ -1,24 +1,26 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { GiHamburgerMenu } from 'react-icons/gi'
+// import { GiHamburgerMenu } from 'react-icons/gi'
+import { GrMenu, GrClose } from 'react-icons/gr'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getIsAuthSelector,
-  getUsernameSelector,
+  // getUsernameSelector,
 } from '../../redux/auth/selectors'
 import { logoutAction } from '../../redux/auth/action'
 import { auth } from '../../firebase/firebase'
+const logo = require('../../assets/logo.png')
 
 const links = [
-  // { href: '/login', title: 'Login' },
-  // { href: '/signup', title: 'Sign Up' },
-  { href: '/design', title: 'Design' },
+  { href: '/', title: 'Advantages' },
+  { href: '/about', title: 'About us' },
+  { href: '/design', title: 'Contacts' },
 ]
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const isAuth = useSelector(getIsAuthSelector)
-  const username = useSelector(getUsernameSelector)
+  // const username = useSelector(getUsernameSelector)
   const dispatch = useDispatch()
 
   const onLogoutClick = () => {
@@ -34,67 +36,116 @@ const Navbar = () => {
 
   return (
     <section className="sticky top-0 z-[20]">
-      <nav className="flex flex-row justify-between bg-slate-200 p-3">
-        <NavLink to="/" className="font-oleo text-xl">
-          TravelChat
-        </NavLink>
-        <div className="hidden w-1/3 items-center justify-between md:flex">
-          {links.map((link, index) => (
-            <NavLink key={index} to={link.href}>
-              {link.title}
+      <nav className="border-b-2 border-red-400 bg-white">
+        <div className="mx-auto flex flex-row items-center gap-3 md:w-[80%] md:justify-between ">
+          {/*  mobile */}
+          {!isOpen && (
+            <div
+              className="cursor-pointer pl-5 text-2xl md:hidden"
+              onClick={toggleNavbar}
+            >
+              <GrMenu />
+            </div>
+          )}
+          {!isOpen && (
+            <NavLink to="/">
+              <img src={logo} alt="logo" />
             </NavLink>
-          ))}
-        </div>
-        {/*  mobile */}
-        {!isAuth ? (
-          <>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/signup">Sign Up</NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink to="/profile">Hi {username}</NavLink>
-            <NavLink onClick={onLogoutClick} to="/">
-              Logout
-            </NavLink>
-          </>
-        )}
-
-        <div
-          className="cursor-pointer text-2xl md:hidden"
-          onClick={toggleNavbar}
-        >
-          <GiHamburgerMenu />
+          )}
+          <div className="hidden w-1/2 items-center justify-between md:flex">
+            {links.map((link, index) => (
+              <NavLink key={index} to={link.href}>
+                {link.title}
+              </NavLink>
+            ))}
+            {isAuth ? (
+              <NavLink
+                onClick={onLogoutClick}
+                to="/"
+                className="btn btn-white text-blue-800"
+              >
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/signup"
+                className="btn btn-white px-8 text-blue-800"
+              >
+                Sign up
+              </NavLink>
+            )}
+          </div>
+          {/* CORRECT HEIGHT 70px */}
+          {isOpen && <div className="h-[70px]"></div>}
+          {/* CLOSE ICON ON THE RIGHT */}
+          {isOpen && (
+            <div
+              className="ml-auto cursor-pointer pr-5 text-2xl md:hidden"
+              onClick={toggleNavbar}
+            >
+              <GrClose />
+            </div>
+          )}
         </div>
       </nav>
 
       {/* ------------------------------------------- */}
       {isOpen && (
-        <nav className="fixed z-[21] flex w-full flex-col items-stretch border-t-2 border-slate-600 bg-slate-200 md:hidden">
-          {links.map((link, index) => (
+        <div className="fixed z-[21] h-screen w-full bg-white">
+          <nav className="flex flex-col items-start gap-2 pl-3 pt-10">
             <NavLink
-              key={index}
-              to={link.href}
+              to="/"
               onClick={closeMenu}
-              className="border-b border-b-black p-2 text-center hover:bg-gray-300"
+              className="p-2 text-2xl hover:bg-gray-300"
             >
-              {link.title}
+              Home
             </NavLink>
-          ))}
-          {!isAuth ? (
-            <>
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/signup">Sign Up</NavLink>
-            </>
-          ) : (
-            <>
-              <NavLink to="/profile">Hi{username}</NavLink>
-              <NavLink onClick={onLogoutClick} to="/">
+            {links.map((link, index) => (
+              <NavLink
+                key={index}
+                to={link.href}
+                onClick={closeMenu}
+                className="p-2 text-2xl hover:bg-gray-300"
+              >
+                {link.title}
+              </NavLink>
+            ))}
+            {isAuth ? (
+              <NavLink
+                onClick={onLogoutClick}
+                to="/"
+                className="btn btn-white text-2xl"
+              >
                 Logout
               </NavLink>
-            </>
-          )}
-        </nav>
+            ) : (
+              <NavLink
+                to="/login"
+                className="btn btn-primary w-[150px] px-8 text-xl"
+                onClick={toggleNavbar}
+              >
+                Sign in
+              </NavLink>
+            )}
+            {isAuth ? (
+              <NavLink
+                onClick={onLogoutClick}
+                to="/"
+                className="btn btn-white text-2xl"
+              >
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/signup"
+                className="btn btn-secondary w-[150px] px-8 text-xl"
+                onClick={toggleNavbar}
+              >
+                Sign up
+              </NavLink>
+            )}
+          </nav>
+        </div>
       )}
       {/*----------- clickable shadow area -----------*/}
       {isOpen && (
