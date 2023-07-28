@@ -9,10 +9,13 @@
   }
   /*//* Buttons */
   .btn {
-    @apply my-2 rounded-md px-2 py-2 text-white hover:opacity-80 hover:transition hover:duration-200 disabled:bg-slate-400/50 disabled:opacity-100;
+    @apply my-2 rounded-md px-2 py-2 text-center text-white hover:opacity-80 hover:transition hover:duration-200 disabled:bg-slate-400/50 disabled:opacity-100;
+  }
+  .btn-white {
+    @apply border-2 border-blue-800 bg-white;
   }
   .btn-primary {
-    @apply bg-purple-600;
+    @apply bg-blue-800;
   }
   .btn-secondary {
     @apply bg-slate-800;
