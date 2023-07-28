@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import FormInput, {
+  emailField,
   passwordConfirmField,
   passwordField,
   usernameField,
@@ -10,13 +11,18 @@ import { signUpUserAction } from '../../../redux/auth/action'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSignUserPayload } from '../../../redux/auth/types'
 import { getIsAuthSelector } from '../../../redux/auth/selectors'
-//* FIREBASE
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { auth } from '../../../firebase/firebase'
+import {
+  auth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from '../../../firebase/firebase'
 
 const SignUp: React.FC = () => {
   const [credentials, setCredentials] = useState({
     [usernameField.name]: '',
+    [emailField.name]: '',
     [passwordField.name]: '',
     [passwordConfirmField.name]: '',
   })
@@ -32,23 +38,41 @@ const SignUp: React.FC = () => {
 
   const inputs = [
     usernameField,
+    emailField,
     passwordField,
     { ...passwordConfirmField, pattern: credentials.password },
   ]
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    const payload: FetchSignUserPayload = {
-      data: {
-        username: credentials[usernameField.name],
-        password: credentials[passwordField.name],
-      },
-    }
-    dispatch(signUpUserAction(payload))
-    setCredentials({
-      [usernameField.name]: '',
-      [passwordField.name]: '',
-      [passwordConfirmField.name]: '',
+    createUserWithEmailAndPassword(
+      auth,
+      credentials[emailField.name],
+      credentials[passwordField.name]
+    ).then((userAuth) => {
+      return updateProfile(userAuth.user, {
+        displayName: credentials[usernameField.name],
+      })
+        .then(() => {
+          dispatch(
+            signUpUserAction({
+              data: {
+                username: userAuth.user.displayName,
+                email: userAuth.user.email,
+                password: credentials[passwordField.name],
+              },
+            })
+          )
+          setCredentials({
+            [usernameField.name]: '',
+            [emailField.name]: '',
+            [passwordField.name]: '',
+            [passwordConfirmField.name]: '',
+          })
+        })
+        .catch((error) => {
+          console.log('user not updated')
+        })
     })
   }
 

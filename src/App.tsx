@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
-import Navbar from './components/Navbar'
-import AppRoutes from './routes'
-import './App.css'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from './firebase/firebase'
-//* redux
 import { useDispatch } from 'react-redux'
-import { logoutAction, signInUserAction } from './redux/auth/action'
 import { FetchSignUserPayload } from './redux/auth/types'
+import { logoutAction, signInUserAction } from './redux/auth/action'
+import { auth, onAuthStateChanged } from './firebase/firebase'
+import AppRoutes from './routes'
+import Navbar from './components/Navbar'
+import './App.css'
 
 function App() {
   const dispatch = useDispatch()
@@ -15,24 +13,21 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
       if (userAuth) {
-        const displayNameFromGoogle = userAuth.displayName
-        if (displayNameFromGoogle) {
-          const payload: FetchSignUserPayload = {
-            data: {
-              username: displayNameFromGoogle,
-              password: 'password1234',
-            },
-          }
-          dispatch(signInUserAction(payload))
-        } else {
-          console.error('Error: Username is null')
+        const displayNameFromFirebase = userAuth.displayName
+        const displayEmailFromFirebase = userAuth.email
+        const payload: FetchSignUserPayload = {
+          data: {
+            username: displayNameFromFirebase,
+            email: displayEmailFromFirebase,
+            password: 'Password1.',
+          },
         }
+        dispatch(signInUserAction(payload))
         console.log(userAuth.displayName)
       } else {
         dispatch(logoutAction())
       }
     })
-    console.log('page loaded')
   }, [dispatch])
 
   return (
