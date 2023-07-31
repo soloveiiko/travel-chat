@@ -21,7 +21,7 @@ export interface AuthState {
 
 export interface FetchSignUserPayload {
   data: {
-    username: string | null
+    username?: string | null
     email?: string | null
     password?: string
   }
