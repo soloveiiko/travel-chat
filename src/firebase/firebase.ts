@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -30,6 +31,7 @@ const auth = getAuth(app)
 export {
   auth,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
   createUserWithEmailAndPassword,

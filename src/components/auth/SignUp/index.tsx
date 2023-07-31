@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import FormInput, {
   emailField,
@@ -8,16 +8,14 @@ import FormInput, {
 } from '../../formInputs'
 import FormContainer from '../../styled/FormContainer'
 import { signUpUserAction } from '../../../redux/auth/action'
-import { useDispatch, useSelector } from 'react-redux'
-import { FetchSignUserPayload } from '../../../redux/auth/types'
-import { getIsAuthSelector } from '../../../redux/auth/selectors'
+import { useDispatch } from 'react-redux'
 import {
   auth,
-  GoogleAuthProvider,
-  signInWithPopup,
   createUserWithEmailAndPassword,
   updateProfile,
 } from '../../../firebase/firebase'
+import GoogleAuth from '../GoogleAuth'
+import FacebookAuth from '../FacebookAuth'
 
 const SignUp: React.FC = () => {
   const [credentials, setCredentials] = useState({
@@ -28,13 +26,6 @@ const SignUp: React.FC = () => {
   })
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const isAuth = useSelector(getIsAuthSelector)
-
-  useEffect(() => {
-    if (isAuth) {
-      navigate('/profile')
-    }
-  }, [isAuth, navigate])
 
   const inputs = [
     usernameField,
@@ -63,6 +54,7 @@ const SignUp: React.FC = () => {
               },
             })
           )
+          navigate('/profile')
           setCredentials({
             [usernameField.name]: '',
             [emailField.name]: '',
@@ -70,7 +62,7 @@ const SignUp: React.FC = () => {
             [passwordConfirmField.name]: '',
           })
         })
-        .catch((error) => {
+        .catch(() => {
           console.log('user not updated')
         })
     })
@@ -80,31 +72,12 @@ const SignUp: React.FC = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
 
-  const onGoogleSignUp = async () => {
-    const provider = new GoogleAuthProvider()
-    const userDataFromGoogle = await signInWithPopup(auth, provider)
-    console.log('sdf from signInWithPopup', userDataFromGoogle)
-    const displayNameFromGoogle = userDataFromGoogle.user.displayName
-    if (displayNameFromGoogle) {
-      const payload: FetchSignUserPayload = {
-        data: {
-          username: displayNameFromGoogle,
-          password: 'password1234',
-        },
-      }
-      dispatch(signUpUserAction(payload))
-    } else {
-      console.error('Error: Username is null')
-    }
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       <FormContainer>
         <h1 className="text-center">Sign Up</h1>
-        <button className="btn btn-secondary" onClick={onGoogleSignUp}>
-          SignUp with Google
-        </button>
+        <GoogleAuth />
+        <FacebookAuth />
         {inputs.map((input, index) => (
           <FormInput
             key={index}
